@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="scripts.js"></script>
+<link rel="stylesheet" type="text/css" href="styles.css">
+<title>Un:Marked</title>
+</head>
+<body>
+
+  <div id="score_screen">
+  	<div class="dash"></div>
+  	<div class="timer_bar"></div>
+  	<h2 id="timer">0</h2><h2 id="timer">'</h2>
+  	<div id="teams">
+  		<div id="team1">
+  			<div class="t1logo"></div>
+  			<div class="t1_score_wrap"><h1 id="team1_score">*</h1></div>
+  			<div class="t1wrap">
+	  			<h2 id="t1">team 1</h2>
+	  		</div>
+  		</div>
+  		<div id="team2">
+  			<div class="t2_score_wrap"><h1 id="team2_score">*</h1></div>
+  			<div class="t2logo"></div>
+  			<div class="t2wrap">
+	  			<h2 id="t2">team 1</h2>
+  		</div>
+  		</div>
+  	</div>
+  </div>
+
+  	<script>
+
+		setInterval(loadScore, 10);
+		setInterval(setTime, 1000);
+
+		var time = document.getElementById('timer');
+		var totalTime = 0;
+
+		function setTime() {
+			if (time.innerHTML < 90) {
+				++totalTime;
+				time.innerHTML = totalTime;
+			}
+		}
+
+		function loadScore() {
+		  var xhttp = new XMLHttpRequest();
+		  xhttp.onreadystatechange = function() {
+		    if (this.readyState == 4 && this.status == 200) {
+		    umScore(this);
+		    }
+		  };
+		  xhttp.open("GET", "data.xml", true);
+		  xhttp.send();
+		}
+
+		function umScore(xml) {
+		  var xmlDoc = xml.responseXML;
+		  var x = xmlDoc.getElementsByTagName("Team");
+		  var team1 = x[0];
+		  var team2 = x[1];
+		  var team1name = team1.getElementsByTagName("Name")[0].childNodes[0].nodeValue;
+		  var team1score = team1.getElementsByTagName("Score")[0].childNodes[0].nodeValue;
+		  var team2name = team2.getElementsByTagName("Name")[0].childNodes[0].nodeValue;
+		  var team2score = team2.getElementsByTagName("Score")[0].childNodes[0].nodeValue;
+
+		  document.getElementById("t1").innerHTML = team1name;
+		  document.getElementById("t2").innerHTML = team2name;
+		  document.getElementById("team1_score").innerHTML = team1score;
+		  document.getElementById("team2_score").innerHTML = team2score;
+
+		}
+
+	</script>
+
+</body>
+</html>

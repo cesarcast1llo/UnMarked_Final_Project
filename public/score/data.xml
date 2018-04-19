@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ScoreScreen>
+	<Team>
+		<Name>Everton</Name>
+		<Score>0</Score>
+	</Team>
+
+	<Team>
+		<Name>Watford</Name>
+		<Score>2</Score>
+	</Team>
+</ScoreScreen>

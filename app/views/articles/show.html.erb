@@ -1,18 +1,64 @@
-<p>
-  <strong>Title:</strong>
-  <%= @article.title %>
-</p>
- 
-<p>
-  <strong>Text:</strong>
-  <%= @article.text %>
-</p>
- 
-<h2>Comments</h2>
-<%= render @article.comments %>
- 
-<h2>Add a comment:</h2>
-<%= render 'comments/form' %>
- 
-<%= link_to 'Edit', edit_article_path(@article) %> |
-<%= link_to 'Back', articles_path %>
+<div id="current_article"> <!-- Wraps entire article in a div. -->
+
+	<div class="cur_img"> <!-- Wraps image in a div so it's easier to manipulate. -->
+		<%= image_tag @article.image.url %>
+	</div>
+
+	<div class="article_container"> <!-- Wraps title, body text, and comments button into a div. -->
+		<div class="current_bar"></div> <!-- White bar. -->
+
+		<div class="article_title"> <!-- Wraps title into a div. -->
+		   <h1><%= @article.title %>.</h1>
+		</div>
+		
+		<div class="current_para">  <!-- Wraps body text into div. -->
+			<%= simple_format @article.text %>
+		</div>
+
+		<h3 class="comms_open" style="cursor:pointer" onclick="openCom()">COMMENTS[<%= @article.comments.size %>]</h3> <!-- Comments button. Uses .js to function. -->
+
+		<h3 class="comms_open edit" style="margin-right: 1em;"><%= link_to 'EDIT', edit_article_path(@article) %></h3>
+
+		<!-- <h3 class="comms_open" style="margin-right: 1em;"><%= link_to 'X', article_path(@article), method: :delete %></h3> -->
+
+		<h3 class="comms_open likes_art" style="margin-right: 1em;"><%= link_to '+LIKES', like_article_path(@article), remote: :true, method: :put %>[<%= @article.votes_for.size %>]</h3>
+
+	</div>
+
+	<div id="thisComments" class="comments_section"> <!-- Wraps comment section into its own div. -->
+
+		<span class="signin">
+			<% if user_signed_in? %> <!-- User Sign In -->
+	          <%= link_to destroy_user_session_path, method: :delete do %>
+	            <span>Log Out</span>
+	          <% end %>
+	        <% else %>
+	          <%= link_to new_user_session_path do %>
+	          	<span>Log In</span>
+	          <% end %>
+	        <% end %>
+    	</span>
+
+		<a href="javascript:void(0)" class="closebtn" onclick="closeCom()">&times;</a> <!-- 'x' closes comments window. uses js.-->
+		
+		<div class="comm_display"> <!-- wraps comments form into a div. -->
+			<%= render @article.comments %>
+			<%= render 'comments/form' %>
+		</div>
+
+	</div>
+
+</div>
+
+<!-- Javascript functions -->
+<script>
+function openCom() {
+    document.getElementById("thisComments").style.width = "30%";
+    document.getElementById("current_article").style.marginRight = "30%";
+}
+
+function closeCom() {
+    document.getElementById("thisComments").style.width = "0";
+    document.getElementById("current_article").style.marginRight = "0";
+}
+</script>

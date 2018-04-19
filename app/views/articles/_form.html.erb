@@ -1,5 +1,11 @@
-<%= form_with model: @article, local: true do |form| %>
- 
+<div class="formContainer">
+
+  <div class="back_button">
+    <%= link_to 'Back', articles_path %>
+  </div>
+
+  <%= form_with model: @article, local: true, html: { multipart: true } do |form| %>
+
   <% if @article.errors.any? %>
     <div id="error_explanation">
       <h2>
@@ -13,19 +19,35 @@
       </ul>
     </div>
   <% end %>
- 
-  <p>
+
+  <div class="form">
     <%= form.label :title %><br>
     <%= form.text_field :title %>
-  </p>
- 
-  <p>
-    <%= form.label :text %><br>
+  </div>
+  <div class="form">
+    <%= form.label :body %><br>
     <%= form.text_area :text %>
-  </p>
- 
-  <p>
-    <%= form.submit %>
-  </p>
- 
+  </div>
+
+  <label class="fileContainer">
+    IMAGE
+    <%= form.file_field :image %>
+  </label>
+
+    <%= form.submit 'SUBMIT' %>
+
 <% end %>
+
+  <div class="back_button">
+    <%= link_to 'Home', controller: '/welcome' %>
+    <%= link_to 'News', controller: '/articles' %>
+    <%= link_to 'Back', :back %>
+  </div>
+
+  <script>
+    $('svg').css('fill', 'black');
+    $('#toggle').remove();
+    $('#menu').remove();
+  </script>
+
+</div>

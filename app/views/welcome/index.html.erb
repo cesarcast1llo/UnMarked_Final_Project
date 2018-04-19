@@ -1,3 +1,70 @@
-<h1>#Unmarked</h1>
+<!-- Ruby [START] -->
+<% database = @articles.reverse %>
 
-<%= link_to 'My Blog', controller: 'articles' %>
+<% z = database.first(4) %>
+
+<% first = z.first(1) %>
+
+<% z.shift %>
+
+<% rating = [] %>
+
+<% feerst =  z.first %>
+
+<% z.shift %>
+
+<% rating << feerst %>
+
+<% two = z.first %>
+
+<% third = z.last %>
+
+<% if two.votes_for.size > feerst.votes_for.size %>
+	<% rating.unshift(two) %>
+<% else %>
+	<% rating << two %>
+<% end %>
+
+<% if third.votes_for.size > feerst.votes_for.size && third.votes_for.size > two.votes_for.size %>
+	<% rating.unshift(third) %>
+<% elsif third.votes_for.size > two.votes_for.size && two == rating.last || third.votes_for.size > feerst.votes_for.size && feerst == rating.last %>
+	<% rating.insert(1, third) %>
+<% else %>
+	<% rating << third %>
+<% end %>
+<!-- Ruby [END] -->
+
+<div class="container">
+
+	<main>
+		<div class="main_wrapper">
+			<% first.each do |y| %>
+				<div class="main_image">
+					<%= image_tag y.image.url %>
+					<div class="main_title">
+						<h1><%= link_to y.title, article_path(y) %>.</h1>
+						<div class="main_bar"></div>
+						<div class="main_par"><%= simple_format y.text %></div>
+					</div>
+				</div>
+			<% end %>
+		</div>
+	</main>
+
+	<!--//////////////-->
+
+	<div class="sidebar">
+	<% rating.each do |a| %>
+		<div class="arti1">
+			<span class="side_img"><%= image_tag a.image.url %></span>
+			<div class="mini_wrap">
+				<h3><%= link_to a.title, article_path(a) %>.</h3>
+				<div class="mini_bar"></div>
+				<p><%= a.text[0..180] %></p>
+			</div>
+		</div>
+	<% end %>
+
+	</div>
+
+</div>

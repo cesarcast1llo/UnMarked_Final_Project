@@ -1,12 +1,15 @@
 class ArticlesController < ApplicationController
+  
+  before_action only: [:show, :edit, :update, :destroy, :like]
+  respond_to :html, :js
 
 	def index
     	@articles = Article.all
-  	end
+  end
 
 	def show
     	@article = Article.find(params[:id])
-  	end
+  end
 
   def new
       @article = Article.new
@@ -15,10 +18,10 @@ class ArticlesController < ApplicationController
   def edit
     @article = Article.find(params[:id])
   end
- 
+
  	def create
   		@article = Article.new(article_params)
- 
+
   		if @article.save
   		  redirect_to @article
       else
@@ -28,23 +31,36 @@ class ArticlesController < ApplicationController
 
   def update
       @article = Article.find(params[:id])
+    
     if @article.update(article_params)
-    redirect_to @article
+      redirect_to @article
     else
       render 'edit'
     end
-end
-  
+  end
 
   def destroy
       @article = Article.find(params[:id])
       @article.destroy
+
       redirect_to articles_path
   end
- 
-private
-  	def article_params
-    	params.require(:article).permit(:title, :text)
-  	end
 
+  def like
+    @article = Article.find(params[:id])
+    @article.like_by current_user
+
+    respond_to do |format|
+      format.html { redirect_to @article }
+      format.js 
+    end
+    
+    redirect_to @article
   end
+
+  private
+  def article_params
+  	params.require(:article).permit(:title, :text, :image)
+  end
+
+end

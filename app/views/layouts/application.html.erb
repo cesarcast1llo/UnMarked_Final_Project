@@ -1,14 +1,90 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Blog</title>
+    <title>Un:Marked</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body>   
+
+    <nav>
+
+      <!-- SVG is the logo. It draws it out based on the coordinates above instead of using an actual image. Magic! -->
+      <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="15vh" height="13vh" viewBox="0 0 564.706 457.315" enable-background="new 0 0 564.706 457.315" xml:space="preserve">
+      <polygon points="474.52,75.913 390.628,242.57 308.252,78.937 308.309,272.824 361.262,366.238 419.99,366.238 472.947,272.824 
+        472.947,457.315 564.706,457.315 564.706,75.913 "/>
+      <rect x="0.013" width="564.693" height="57.803"/>
+      <path d="M132.676,373.628c-24.764-4.068-39.731-23.412-39.731-54.416V75.913H0V321.34c0,79.249,58.789,131.26,132.676,135.654
+        V373.628z"/>
+      <path d="M193.861,75.913v243.299c0,30.582-15.362,49.844-39.735,54.265v83.448c73.483-4.82,132.676-56.709,132.676-135.585V75.913
+        H193.861z"/>
+      </svg>
+      <!-- SVG [END] -->
+
+      <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <ul>
+          <li><h3><%= link_to 'HOME', controller: '/welcome' %></h3></li>
+          <li><h3><%= link_to 'NEWS', controller: '/articles' %></h3></li>
+          <li onclick="loadStand()" class="clicker"><h3>STANDINGS</h3></li>
+          <li onclick="loadStat()" class="clicker2"><h3>STATS</h3></li>
+        </ul>
+      </div>
+
+      <span class="hamburger" onclick="openNav()">&#9776;</span>
+
+    </nav>
+
+    <!--STANDINGS BEGIN-->
+    <div class="stand">
+        <button class="close" aria-label="Close">✕</button>
+        <table id="stand"></table>
+    </div>
+    <!--STANDINGS END-->
+
+    <!--STATS BEGIN-->
+    <div class="stat">
+      <button class="close2" aria-label="Close">✕</button>
+      <table id="stat"></table>
+    </div>
+    <!--STATS END-->
+
     <%= yield %>
   </body>
+
+  <script>
+
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "20vw";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+
+    $('.clicker').on('click', function() {
+      $('.stand').css({"opacity": "1", "z-index": "10", "transform": "scale(1)"});
+    });
+
+    $('button.close').on('click', function() {
+      $('.stand').css("transform", "scale(0.5)");
+      $('.stand').css("opacity", "1");
+      $('.stand').css("z-index", "-5");
+    });
+
+    $('.clicker2').on('click', function() {
+      $('.stat').css({"opacity": "1", "z-index": "15", "transform": "scale(1)"});
+    });
+
+    $('button.close2').on('click', function() {
+      $('.stat').css("transform", "scale(0.5)");
+      $('.stat').css("opacity", "0");
+      $('.stat').css("z-index", "-5");
+    });
+  </script>
+
 </html>

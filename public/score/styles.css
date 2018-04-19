@@ -1,0 +1,153 @@
+@font-face {
+    font-family: 'DINPro';
+    src: url('DINPro-Black.eot');
+    src: url('DINPro-Black.eot?#iefix') format('embedded-opentype'),
+        url('DINPro-Black.woff') format('woff'),
+        url('DINPro-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DINPro';
+    src: url('DINPro-Regular.eot');
+    src: url('DINPro-Regular.eot?#iefix') format('embedded-opentype'),
+        url('DINPro-Regular.woff') format('woff'),
+        url('DINPro-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'DINPro', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'DINPro', sans-serif;
+    font-weight: 900;
+    font-style: normal;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+h1 {
+    font-size: 15vw;
+}
+
+h2#timer {
+    font-size: 5vw;
+    line-height: .75;
+}
+
+#score_screen {
+    text-align: center;
+    width: 70vw;
+    margin: auto;
+    /*background-color: #eee;*/
+    margin-top: 0;
+    position: relative;
+}
+
+.dash {
+    width: 4vw;
+    height: 3vh;
+    background-color: black;
+    position: absolute;
+    top: 55%;
+    left: 33vw;
+}
+
+#score_screen h2 {
+    display: inline;
+}
+
+.timer_bar {
+    width: 6vw;
+    height: 2vh;
+    background-color: black;
+    text-align: center;
+    margin: auto;
+    padding: 0;
+}
+
+#teams {
+    /*background-color: Grey;*/
+    width: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+#team1 {
+    /*background-color: red;*/
+    display: grid;
+    grid-template-columns: 60% 35%;
+    grid-template-rows: 40vh 15vh;
+    padding-right: 5%;
+    text-align: right;
+}
+
+#team2 {
+    /*background-color: blue;*/
+    display: grid;
+    grid-template-columns: 40% 60%;
+    grid-template-rows: 40vh 15vh;
+    padding-left: 10%;
+    text-align: left;
+}
+
+h2#t1 {
+    font-size: 4vw;
+    border-bottom: 3vh solid black;
+}
+
+h2#t2 {
+    font-size: 4vw;
+    border-bottom: 3vh solid black;
+}
+
+/*.t1bar {
+    height: 2.5vh;
+    width: 10vw;
+    background-color: black;
+}*/
+
+.t1wrap {
+    /*background-color: yellow;*/
+    grid-column: 1/span 2;
+
+}
+
+.t2wrap {
+    /*background-color: yellow;*/
+    grid-column: 1/span 2;
+}
+
+.t2_score_wrap {
+    /*background-color: cyan;*/
+    position: relative;
+}
+
+.t1_score_wrap {
+    /*background-color: cyan;*/
+    position: relative;
+}
+
+h1#team2_score {
+    position: absolute;
+    bottom: -3vh;
+    left: 0;
+    margin: 0;
+}
+
+h1#team1_score {
+    position: absolute;
+    bottom: -3vh;
+    right: 0;
+    margin: 0;
+}

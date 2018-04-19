@@ -1,13 +1,8 @@
-<p>
-  <strong>Commenter:</strong>
-  <%= comment.commenter %>
-</p>
+<div class="comm_bar"></div>
+<h3>
+  <%= comment.commenter %>.
+</h3>
  
-<p>
-  <strong>Comment:</strong>
+<p class="comm_body">
   <%= comment.body %>
-</p>
- 
-<p>
-  <%= link_to 'Destroy Comment', [comment.article, comment], method: :delete, data: { confirm: 'Are you sure?' } %>
 </p>
