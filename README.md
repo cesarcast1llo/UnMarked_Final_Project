@@ -1,26 +1,3 @@
 # README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# UnMarked
-# UnMarked_Final_Project
+Final Cohort project replicating ESPN FC website with user authenticated articles, live scores and standings. 
+Rails, JS, XML, Devise, CSS grids.
